@@ -1,19 +1,23 @@
 #include <bits/stdc++.h>
-#include <fstream>
-#include <string>
-#include <conio.h>
-#include <cstdlib>
-
 using namespace std;
 
 class Batsman{
     private:
-    vector<pair<int,int>> runs_scored;
+    int runs_scored[3];
     float strike_rate[3];
     float batting_avg;
+    static int balls_faced[3];
+    bool outOrNot[3];
 
-    void setStrikeRate(){
-
+    void setStrikeRate(int m){
+        strike_rate[m-1] = runs_scored[m-1]/balls_faced[m-1];
+    }
+    void setBattingAvg(int m){
+        int runs = 0;
+        for(int i=0;i<m;i++){
+            runs += runs_scored[i];
+        }
+        batting_avg = runs/m;
     }
     protected:
     int highest_score;
@@ -21,19 +25,22 @@ class Batsman{
     public:
     Batsman(){
         for(int i=0;i<3;i++){
+            runs_scored[i] = 0;
             strike_rate[i] = 0;
+            outOrNot[i] = false;
         }
         batting_avg = 0;
         highest_score = 0;
     }
     void setRuns(int m, int runs){
-        runs_scored.emplace_back(make_pair(m,runs));
+        runs_scored[m-1] += runs;
+        setStrikeRate(m);
     }
     int getRuns(int m){
-        return runs_scored[m].second;
+        return runs_scored[m-1];
     }
     float getStrikeRate(int m){
-        return strike_rate[m];
+        return strike_rate[m-1];
     }
     float getBattingAvg(){
         return batting_avg;

@@ -1,8 +1,6 @@
 #include <bits/stdc++.h>
-#include <fstream>
-#include <string>
-#include <conio.h>
-#include <cstdlib>
+#ifndef BOWLER_H
+#define BOWLER_H
 
 using namespace std;
 
@@ -36,3 +34,5 @@ class Bowler{
         return economy[m];
     }
 };
+
+#endif
