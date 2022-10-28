@@ -7,7 +7,6 @@ class Batsman{
     float strike_rate[3];
     float batting_avg;
     static int balls_faced[3];
-    bool outOrNot[3];
 
     void setStrikeRate(int m){
         strike_rate[m-1] = runs_scored[m-1]/balls_faced[m-1];
@@ -27,9 +26,8 @@ class Batsman{
         for(int i=0;i<3;i++){
             runs_scored[i] = 0;
             strike_rate[i] = 0;
-            outOrNot[i] = false;
         }
-        batting_avg = 0;
+        batting_avg = 0.0;
         highest_score = 0;
     }
     void setRuns(int m, int runs){
@@ -45,7 +43,9 @@ class Batsman{
     float getBattingAvg(){
         return batting_avg;
     }
-    void displayMatchWiseStats(){
-
+    void displayMatchWiseStats(int m){
+        cout<<"Runs Scored in Match "<<m<<" : "<<getRuns(m)<<endl;
+        cout<<"Balls faced in Match "<<m<<" : "<<balls_faced[m-1]<<endl;
+        cout<<"Strike Rate in Match "<<m<<" : "<<getStrikeRate(m)<<endl;
     }
 };

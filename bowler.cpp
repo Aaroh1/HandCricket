@@ -19,19 +19,29 @@ class Bowler{
         }
     }
     void setWickets(int m, int w){
-        wickets[m] += w;
+        wickets[m-1] += w;
     }
     int getWickets(int m){
-        return wickets[m];
+        return wickets[m-1];
     }
     void runsConceeded(int m, int runs){
-        runs_conceeded[m] += runs;
+        runs_conceeded[m-1] += runs;
     }
     void setEconomy(int m, float e){
-        economy[m] = e;
+        economy[m-1] = e;
     }
     float getEconomy(int m){
-        return economy[m];
+        return economy[m-1];
+    }
+    void displayBestFigures(){
+        int runs = INT_MAX, wicket = INT_MIN;
+        for(int i=0;i<3;i++){
+            if(wickets[i]>=wicket || runs_conceeded[i]<runs){
+                runs = runs_conceeded[i];
+                wicket = wickets[i];
+            }
+        }
+        cout<<"Best Figures: "<<runs<<"-"<<wicket<<endl;
     }
 };
 
