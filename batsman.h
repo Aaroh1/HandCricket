@@ -18,6 +18,12 @@ class Batsman{
         }
         batting_avg = runs/m;
     }
+    void setHighestScore(int m){
+        for(int i=0;i<m;i++){
+            if(highest_score <= runs_scored[i])
+                highest_score = runs_scored[i];
+        }
+    }
     protected:
     int highest_score;
 
@@ -35,6 +41,7 @@ class Batsman{
         balls_faced[m-1] += 1;
         setStrikeRate(m);
         setBattingAvg(m);
+        setHighestScore(m);
     }
     int getRuns(int m){
         return runs_scored[m-1];
@@ -44,6 +51,9 @@ class Batsman{
     }
     float getBattingAvg(){
         return batting_avg;
+    }
+    int getHighestScore(){
+        return highest_score;
     }
     void displayMatchWiseStats(int m){
         cout<<"Runs Scored in Match "<<m<<" : "<<getRuns(m)<<endl;
