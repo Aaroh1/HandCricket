@@ -32,7 +32,9 @@ class Batsman{
     }
     void setRuns(int m, int runs){
         runs_scored[m-1] += runs;
+        balls_faced[m-1] += 1;
         setStrikeRate(m);
+        setBattingAvg(m);
     }
     int getRuns(int m){
         return runs_scored[m-1];
@@ -47,5 +49,6 @@ class Batsman{
         cout<<"Runs Scored in Match "<<m<<" : "<<getRuns(m)<<endl;
         cout<<"Balls faced in Match "<<m<<" : "<<balls_faced[m-1]<<endl;
         cout<<"Strike Rate in Match "<<m<<" : "<<getStrikeRate(m)<<endl;
+        cout<<"Batting Average till Match "<<m<<" : "<<getBattingAvg()<<endl; 
     }
 };

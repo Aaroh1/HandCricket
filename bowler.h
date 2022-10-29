@@ -24,11 +24,11 @@ class Bowler{
     int getWickets(int m){
         return wickets[m-1];
     }
-    void runsConceeded(int m, int runs){
+    void setRunsConceeded(int m, int runs){
         runs_conceeded[m-1] += runs;
     }
-    void setEconomy(int m, float e){
-        economy[m-1] = e;
+    void setEconomy(int m, float overs){
+        economy[m-1] = runs_conceeded[m-1]/overs;
     }
     float getEconomy(int m){
         return economy[m-1];
