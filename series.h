@@ -3,7 +3,7 @@ using namespace std;
 #include "team.h"
 #include "Match.cpp"
 
-class Series : public Team, public Match{
+class Series{
     private:
     //Data Members
     static int matches_played;
@@ -26,7 +26,7 @@ int Series::matches_played = 0;
 
 //Public Member Functions
 Series:: Series(Team cteam1, Team cteam2):team1(cteam1),team2(cteam2){
-    
+
 }
 void Series:: getSeriesStats(){
     if(team1.getNoOfWins() > team2.getNoOfWins()){
