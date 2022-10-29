@@ -29,8 +29,16 @@ class Team{
         bowlers[i-1].setWickets(m,w);
         bowlers[i-1].setEconomy(m,overs);
     }
-    void displayMatchStats(int m){
-        
+    void displayMatchStats(int m, int i){
+        cout<<"Team "<<i<<endl;
+        for(int i=0;i<3;i++){
+            cout<<"Player "<<i+1<<setw(15)<<batsmen[i].getRuns(m);
+        }
+        cout<<"\n\n";
+        for(int i=0;i<2;i++){
+            cout<<"Player "<<i+4<<setw(15)<<bowlers[i].getRunsConceeded(m)<<"-"<<bowlers[i].getWickets(m)<<endl;
+        }
+        cout<<endl;
     }
 
 

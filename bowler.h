@@ -27,6 +27,9 @@ class Bowler{
     void setRunsConceeded(int m, int runs){
         runs_conceeded[m-1] += runs;
     }
+    int getRunsConceeded(int m){
+        return runs_conceeded[m-1];
+    }
     void setEconomy(int m, float overs){
         economy[m-1] = runs_conceeded[m-1]/overs;
     }
