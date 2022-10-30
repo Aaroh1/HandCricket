@@ -1,5 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
+#ifndef BATSMAN_H
+#define BATSMAN_H
+
 
 class Batsman{
     private:
@@ -25,10 +28,12 @@ class Batsman{
     void setRuns(int m, int runs);
     int getRuns(int m);
     int getTotalRuns(int m);
+    int getBallsFaced(int m);
     float getStrikeRate(int m);
     float getBattingAvg();
     int getHighestScore();
     void displayMatchWiseStats(int m);
+    void displayBatsmanStats();
 };
 
 //Public Member Functions
@@ -57,6 +62,9 @@ int Batsman:: getTotalRuns(int m){
     }
     return total;
 }
+int Batsman:: getBallsFaced(int m){
+    return balls_faced[m-1];
+}
 float Batsman:: getStrikeRate(int m){
     return strike_rate[m-1];
 }
@@ -71,6 +79,12 @@ void Batsman:: displayMatchWiseStats(int m){
     cout<<"Balls faced in Match "<<m<<" : "<<balls_faced[m-1]<<endl;
     cout<<"Strike Rate in Match "<<m<<" : "<<getStrikeRate(m)<<endl;
     cout<<"Batting Average till Match "<<m<<" : "<<getBattingAvg()<<endl; 
+}
+void Batsman:: displayBatsmanStats(){
+    for(int i=0;i<3;i++){
+        cout<<"Match "<<i+1<<setw(15)<<runs_scored[i]<<"("<<balls_faced[i]<<")"<<"\n\n";
+    }
+    cout<<"Batting Average throughout the series : "<<batting_avg<<endl;
 }
 
 //Private Member Functions
@@ -87,3 +101,5 @@ void Batsman:: setBattingAvg(int m){
 void Batsman:: setHighestScore(int m){
     highest_score = (highest_score < runs_scored[m-1])?runs_scored[m-1]:highest_score;
 }
+
+#endif

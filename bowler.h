@@ -23,6 +23,7 @@ class Bowler{
     void setEconomy(int m, float overs);
     float getEconomy(int m);
     void displayBestFigures();
+    void displayBowlerStats();
 };
 
 //Public Member Functions
@@ -67,6 +68,11 @@ void Bowler:: displayBestFigures(){
         }
     }
     cout<<"Best Figures: "<<runs<<"-"<<wicket<<endl;
+}
+void Bowler:: displayBowlerStats(){
+    for(int i=0;i<3;i++){
+        cout<<"Match "<<i+1<<setw(15)<<runs_conceeded[i]<<"-"<<wickets[i]<<"\n\n";
+    }
 }
 
 #endif

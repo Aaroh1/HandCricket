@@ -2,6 +2,9 @@
 using namespace std;
 #include "batsman.h"
 #include "bowler.h"
+#ifndef TEAM_H
+#define TEAM_H
+
 
 class Team{
     private:
@@ -31,6 +34,7 @@ class Team{
     void updateBowlStats(int m, int runs, int w, int p, float overs);
     void displayMatchStats(int m);
     void displayTeamStats(int m);
+    void displayPlayerStats(int p);
 };
 
 //Public Member Functions
@@ -57,6 +61,7 @@ int Team:: getBestBowler(){
 }
 void Team:: displayTeam(){
     cout<<"Playing team"<<endl;
+    cout<<"_____________"<<endl;
     cout<<"Player 1(Batsman)"<<endl;
     cout<<"Player 2(Batsman)"<<endl;
     cout<<"Player 3(Batsman)"<<endl;
@@ -77,18 +82,24 @@ void Team:: updateBowlStats(int m, int runs, int w, int p, float overs){
 void Team:: displayMatchStats(int m){
     cout<<name<<endl;
     for(int i=0;i<3;i++){
-        cout<<"Batsman "<<i+1<<setw(15)<<batsmen[i].getRuns(m);
+        cout<<"Batsman "<<i+1<<setw(15)<<batsmen[i].getRuns(m)<<"("<<batsmen[i].getBallsFaced(m)<<")"<<endl;
     }
     cout<<"\n\n";
     for(int i=0;i<2;i++){
         cout<<"Bowler "<<i+1<<setw(15)<<bowlers[i].getRunsConceeded(m)<<"-"<<bowlers[i].getWickets(m)<<endl;
     }
-    cout<<endl;
+    cout<<"\n\n";
 }
 
 void Team:: displayTeamStats(int m){
     cout<<"Highest Run Scorer : Player "<<bestBatsman<<" ("<<batsmen[bestBatsman-1].getTotalRuns(m)<<" runs)"<<endl;
     cout<<"Highest Wicket taker : Player "<<bestBowler+3<<" ("<<bowlers[bestBowler-1].getTotalWickets(m)<<" wickets)"<<endl;
+}
+
+void Team:: displayPlayerStats(int p){
+    if(p==1 || p==2 || p==3) batsmen[p-1].displayBatsmanStats();
+    else if(p==4 || p==5) bowlers[p-4].displayBowlerStats();
+    else cout<<"Sorry, Player does not exist!"<<endl;
 }
 
 //Private Member Functions
@@ -108,3 +119,6 @@ void Team:: setBestBowler(int m){
     if(wicketsByBowler1 >= wicketsByBowler2) bestBowler = 1;
     else if(wicketsByBowler1 < wicketsByBowler2) bestBowler = 2;
 }
+
+
+#endif

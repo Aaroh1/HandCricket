@@ -2,6 +2,9 @@
 using namespace std;
 #include "team.h"
 #include "Match.cpp"
+#ifndef SERIES_H
+#define SERIES_H
+
 
 class Series{
     private:
@@ -13,20 +16,19 @@ class Series{
 
     public:
     //Constructors
-    Series(Team cteam1, Team cteam2);
+    Series(Team cteam1, Team cteam2, Match cmatch[]);
     //Member Functions    
     void getSeriesStats();
     void displayLeaderboard();
     void displayMatchScorecard(int m);
     void displayTeamStats(int t);
-    void displayPlayerStats(int m);
+    void displayPlayerStats(int t, int p);
 };
 
 int Series::matches_played = 0;
 
 //Public Member Functions
-Series:: Series(Team cteam1, Team cteam2):team1(cteam1),team2(cteam2){
-
+Series:: Series(Team cteam1, Team cteam2, Match cmatch[]):team1(cteam1),team2(cteam2),match{Match(), Match(), Match()}{
 }
 void Series:: getSeriesStats(){
     if(team1.getNoOfWins() > team2.getNoOfWins()){
@@ -49,6 +51,11 @@ void Series:: displayTeamStats(int m){
     cout<<team2.getTeamName()<<" Stats"<<endl;
     team2.displayTeamStats(m);
 }
-void Series:: displayPlayerStats(int m){
-    
+void Series:: displayPlayerStats(int t, int p){
+    if(t==0 && p>=1 && p<=5) team1.displayPlayerStats(p);
+    else if(t==1 && p>=1 && p<=5) team1.displayPlayerStats(p);
+    else cout<<"Inappropiate team or player selection"<<endl;
 }
+
+
+#endif
