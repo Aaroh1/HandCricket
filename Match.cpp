@@ -4,12 +4,14 @@
 #include <conio.h>
 #include <cstdlib>
 #include "team.h"
+using namespace std;
 class Match
 {
     int target;
     int currentscore;
     int wickets;
     static int inningsnum;
+    int matchnum;
     int Toss();
     void Bat(int, Team &, Team &);
     void Bowl(int, Team &, Team &);
@@ -34,6 +36,8 @@ int Match::Toss()
 }
 void Match::Playmatch(Team &t1, Team &t2)
 {
+    matchnum=t1.getNoOfWins()+t2.getNoOfWins()+1;
+    cout<<"Match "<<matchnum<<" out of 4 in the Series\n";
     cout << "Match about to begin .....\n";
     int teambat, teambowl;
     teambat = Toss();
@@ -44,13 +48,29 @@ void Match::Playmatch(Team &t1, Team &t2)
     cin >> choice;
     if (choice == teambat + 1)
     {
-        Bat(teambat, t1, t2);
-        Bowl(teambat, t1, t2);
+        if (teambat)
+        {
+            Bat(teambat, t2, t1);
+            Bowl(teambat, t2, t1);
+        }
+        else
+        {
+            Bat(teambat, t1, t2);
+            Bowl(teambat, t1, t2);
+        }
     }
     else
     {
-        Bowl(teambowl, t1, t2);
-        Bat(teambowl, t1, t2);
+        if (!teambowl)
+        {
+            Bowl(teambowl, t1, t2);
+            Bat(teambowl, t1, t2);
+        }
+        else
+        {
+            Bowl(teambowl, t2, t1);
+            Bat(teambowl, t2, t1);
+        }
     }
 }
 void Match::Bat(int t, Team &t1, Team &t2)
@@ -72,7 +92,8 @@ void Match::Bat(int t, Team &t1, Team &t2)
         if (ball == bat)
         {
             wickets++;
-            cout << "Oh No! You've lost a wicket....!!\n";
+            t2.updateBowlStats(matchnum,0,1,1+overs%2,1+overs%2);
+            cout<< "Oh No! You've lost a wicket....!!\n";
             cout << "On strike: Player " << wickets + 1 << endl;
         }
         else
@@ -100,6 +121,8 @@ void Match::Bat(int t, Team &t1, Team &t2)
                 currentscore += 6;
                 break;
             }
+            t1.updateBatStats(matchnum,bat,wickets+1);
+            t2.updateBowlStats(matchnum,bat,0,1+overs%2,1+overs%2);
         }
         // BOX print
         cout << currentscore << " - " << wickets << " \n";
@@ -125,19 +148,13 @@ void Match::Bat(int t, Team &t1, Team &t2)
         if (currentscore >= target)
         {
             cout << "Hurray! Team " << t + 1 << " has completed the chase and won the match by " << 3 - wickets << " wickets!\n";
-            if (!t)
-                t2.updateNoOfWins(t2.getNoOfWins() + 1);
-            else
-                t1.updateNoOfWins(t1.getNoOfWins() + 1);
+            t1.updateNoOfWins(t1.getNoOfWins() + 1);
         }
         else
         {
             cout << "Alas! You could not achieve the target :( \nTeam " << t + 1 << " has lost the match!\n";
             cout << "Team " << !t + 1 << " won by " << target - currentscore << " runs.\n";
-            if (t)
-                t2.updateNoOfWins(t2.getNoOfWins() + 1);
-            else
-                t1.updateNoOfWins(t1.getNoOfWins() + 1);
+            t2.updateNoOfWins(t2.getNoOfWins() + 1);
         }
     }
     else
@@ -152,17 +169,12 @@ void Match::Bat(int t, Team &t1, Team &t2)
 void Match::Bowl(int t, Team &t1, Team &t2)
 {
     system("cls");
-    int bat, ball, overs = 0, numballs = 0, setCurrentScore(0);
+    int bat, ball, overs = 0, numballs = 0,setCurrentScore(0);
     cout << "Innings " << inningsnum << endl;
     cout << "Batting : Team " << endl;
     cout << "Bowling : Team " << endl;
     while (wickets < 3 && overs < 4 && (target == -1) ? 1 : target > currentscore)
     {
-        if (numballs && numballs % 6 == 0)
-        {
-            cout << "End of over " << overs + 1 << endl;
-            overs++;
-        }
         cout << "Enter a number between 1 and 6(except 5): ";
         cin >> ball;
         if (bat < 1 || bat > 6)
@@ -176,11 +188,14 @@ void Match::Bowl(int t, Team &t1, Team &t2)
         if (ball == bat)
         {
             wickets++;
-            cout << "Beautiful delivery! The CPU lost a wicket....!!";
+            t1.updateBowlStats(matchnum,0,1,1+overs%2,1+overs%2);
+            cout << "Beautiful delivery! The CPU lost a wicket....!!\n";
         }
         else
         {
             currentscore += bat;
+            t2.updateBatStats(matchnum,bat,wickets+1);
+            t1.updateBowlStats(matchnum,bat,0,1+overs%2,1+overs%2);
         }
         // BOX print
         cout << currentscore << " - " << wickets << " \n";
@@ -189,6 +204,13 @@ void Match::Bowl(int t, Team &t1, Team &t2)
             if (currentscore > target)
                 break;
             cout << " Team " << !t + 1 << " needs " << target - currentscore << " runs in " << 24 - numballs << " balls.\n";
+        }
+        if (numballs % 6 == 0)
+        {
+            cout << "End of over " << overs + 1 << endl;
+            overs++;
+            cout << "On strike: Player " << wickets + 1 << endl;
+            cout << "With the Ball: Player " << 4 + overs % 2 << endl;
         }
     }
     if (wickets == 3)
@@ -199,19 +221,13 @@ void Match::Bowl(int t, Team &t1, Team &t2)
         if (currentscore >= target)
         {
             cout << "Tough Luck! Team " << !t + 1 << " has completed the chase and won the match by " << 3 - wickets << " wickets!\n";
-            if (!t)
-                t2.updateNoOfWins(t2.getNoOfWins() + 1);
-            else
-                t1.updateNoOfWins(t1.getNoOfWins() + 1);
+            t2.updateNoOfWins(t2.getNoOfWins() + 1);
         }
         else
         {
             cout << "Good work done! Team " << t + 1 << " has successfully defended " << target << " runs!\n";
             cout << "Team " << t + 1 << " won by " << target - currentscore << " runs.\n";
-            if (t)
-                t2.updateNoOfWins(t2.getNoOfWins() + 1);
-            else
-                t1.updateNoOfWins(t1.getNoOfWins() + 1);
+            t1.updateNoOfWins(t1.getNoOfWins() + 1);
         }
     }
     else
@@ -224,7 +240,6 @@ void Match::Bowl(int t, Team &t1, Team &t2)
     }
 }
 
-using namespace std;
 int main()
 {
     return 0;
