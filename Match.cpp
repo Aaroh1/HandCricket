@@ -1,9 +1,9 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 #include <fstream>
 #include <string>
 #include <conio.h>
 #include <cstdlib>
-
+#include "team.h"
 class Match
 {
     int target;
@@ -26,14 +26,14 @@ protected:
 
 public:
     void ScoreCard();
-    void Playmatch();
+    void Playmatch(Team &, Team &);
 };
 int Match::inningsnum = 1;
 int Match::Toss()
 {
     return rand() % 2;
 }
-void Match::Playmatch()
+void Match::Playmatch(Team &t1, Team &t2)
 {
     cout << "Match about to begin .....\n";
     int teambat, teambowl;
@@ -51,51 +51,139 @@ void Match::Playmatch()
 void Match::Bat(int t)
 {
     system("cls");
-    int bat, ball;
-    while (wickets < 3)
+    int bat, ball, overs = 0, numballs = 0;
+    while (wickets < 3 && overs < 4)
     {
+        if (numballs && numballs % 6 == 0)
+        {
+            cout << "End of over " << overs + 1 << endl;
+            overs++;
+        }
         cout << "enter a number between 1 and 6(except 5): ";
         cin >> bat;
-        if (bat < 1 || bat > 6 || bat==5 )
+        if (bat < 1 || bat > 6 || bat == 5)
         {
             cout << "Invalid entry. Try again";
             continue;
         }
         ball = rand() % 6 + 1;
-        cout<<"The bowler picked : "<<ball<<endl;
-        if(ball==bat)
+        numballs++;
+        cout << "The cpu picked : " << ball << endl;
+        if (ball == bat)
         {
             wickets++;
-            cout<<"Oh No! You've lost a wicket....!!";
+            cout << "Oh No! You've lost a wicket....!!";
         }
         else
         {
-            switch(bat)
+            switch (bat)
             {
-                case 1:
-                cout<<"A quick single\n";
-                currentscore+=1;
+            case 1:
+                cout << "A quick single\n";
+                currentscore += 1;
                 break;
-                case 2:
-                cout<<"Two runs\n";
-                currentscore+=2;
+            case 2:
+                cout << "Two runs\n";
+                currentscore += 2;
                 break;
-                case 3:
-                cout<<"Pacy 3 runs\n";
-                currentscore+=3;
+            case 3:
+                cout << "Pacy 3 runs\n";
+                currentscore += 3;
                 break;
-                case 4:
-                cout<<"Cruising out for a four!\n";
-                currentscore+=4;
+            case 4:
+                cout << "Cruising out for a four!\n";
+                currentscore += 4;
                 break;
-                case 6:
-                cout<<"Smashed out for 6 runs!!\n";
-                currentscore+=6;
+            case 6:
+                cout << "Smashed out for 6 runs!!\n";
+                currentscore += 6;
                 break;
             }
         }
+        // BOX print
+        cout << currentscore << " - " << wickets << " \n";
+        if (target != -1)
+          { 
+             if(currentscore>target)
+             break;
+             cout << " Team "<<t<<" needs " << target - currentscore << " runs in " << 24 - numballs << " balls.\n";
+          }
+    }
+    if (wickets == 3)
+        cout << "All OUT!!\n";
+    cout << "End of Innings " << innings << "\n";
+    if (target > -1)
+    {
+        if (currentscore >= target)
+        {
+            cout << "Hurray! Team " << t + 1 << " has completed the chase and won the match by " << 3 - wickets << " wickets!\n";
+        }
+        else
+        {
+            cout << "Alas :( Team " << t + 1 << " has lost the match!\n";
+            cout << "Team " << !t + 1 << " won by " << target - currentscore << " runs.\n";
+        }
     }
 }
+void Match::Bowl(int t)
+{
+    system("cls");
+    int bat, ball, overs = 0, numballs = 0;
+    cout << "Innings " << inningsnum;
+    cout << "Batting : Team " << endl;
+    cout << "Bowling : Team " << endl;
+    while (wickets < 3 && overs < 4 && (target == -1) ? 1 : target > currentscore)
+    {
+        if (numballs && numballs % 6 == 0)
+        {
+            cout << "End of over " << overs + 1 << endl;
+            overs++;
+        }
+        cout << "Enter a number between 1 and 6(except 5): ";
+        cin >> ball;
+        if (bat < 1 || bat > 6)
+        {
+            cout << "Invalid entry. Try again";
+            continue;
+        }
+        bat = rand() % 6 + 1;
+        numballs++;
+        cout << "The cpu picked : " << ball << endl;
+        if (ball == bat)
+        {
+            wickets++;
+            cout << "Beautiful delivery! The CPU lost a wicket....!!";
+        }
+        else
+        {
+            currentscore += bat;
+        }
+        // BOX print
+        cout << currentscore << " - " << wickets << " \n";
+        if (target != -1)
+          { 
+             if(currentscore>target)
+             break;
+             cout << " Team "<<!t+1<<" needs " << target - currentscore << " runs in " << 24 - numballs << " balls.\n";
+          }
+    }
+    if (wickets == 3)
+        cout << "All OUT!!\n";
+    cout << "End of Innings " << innings << "\n";
+    if (target > -1)
+    {
+        if (currentscore >= target)
+        {
+            cout << "Tough Luck! Team " << !t + 1 << " has completed the chase and won the match by " << 3 - wickets << " wickets!\n";
+        }
+        else
+        {
+            cout << "Good work done! Team " << t + 1 << " has successfully defended "<<target<<" runs!\n";
+            cout << "Team " << !t + 1 << " won by " << target - currentscore << " runs.\n";
+        }
+    }
+}
+
 using namespace std;
 int main()
 {

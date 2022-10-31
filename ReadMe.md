@@ -22,7 +22,7 @@
 ***Private***
 - **_target_**: It is an int variable which holds the target for the match.
 - **_currentscore_**: It is an int variable which holds the current score of the team at a particular match.
-- **_wickets_**: It is an int containing the total number of wickets lost for the team who has chose to bat .
+- **_wickets_**: It is an int containing the total number of wickets lost for the team which is batting.
 
 ***Protected***
 
