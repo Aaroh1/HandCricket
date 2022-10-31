@@ -30,6 +30,7 @@ class Team{
     int getBestBatsman();
     int getBestBowler();
     void displayTeam();
+    void updateNoOfWins(int w);
     void updateBatStats(int m, int runs, int p);
     void updateBowlStats(int m, int runs, int w, int p, float overs);
     void displayMatchStats(int m);
@@ -67,6 +68,9 @@ void Team:: displayTeam(){
     cout<<"Player 3(Batsman)"<<endl;
     cout<<"Player 4(Bowler)"<<endl;
     cout<<"Player 5(Bowler)"<<endl;
+}
+void Team:: updateNoOfWins(int w){
+    no_of_Wins=w;
 }
 void Team:: updateBatStats(int m, int runs, int p){
     batsmen[p-1].setRuns(m,runs);
