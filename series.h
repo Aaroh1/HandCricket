@@ -54,7 +54,7 @@ void Series:: displayLeaderboard(){
 
 }
 void Series:: displayMatchScorecard(int m){
-    // match[m-1].ScoreCard();
+    match[m-1].ScoreCard(m);
 }
 void Series:: displayTeamStats(int m){
     cout<<team1.getTeamName()<<" Stats"<<endl;

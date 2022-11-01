@@ -1,4 +1,6 @@
 #include <bits/stdc++.h>
+#include <conio.h>
+#include <cstdlib>
 using namespace std;
 #include "series.h"
 #include "batsman.h"
@@ -7,14 +9,14 @@ using namespace std;
 #include "Match.h"
 #ifndef TERMINAL_H
 #define TERMINAL_H
-class Matchterminal:public Series
+class Matchterminal : public Series
 {
 public:
-    Matchterminal(Team cteam1, Team cteam2):Series(cteam1,cteam2){}
+    Matchterminal(Team cteam1, Team cteam2) : Series(cteam1, cteam2) {}
     void menu()
     {
         cout << "\n******************************************************************************************\n";
-        cout << "                                     MATCH TERMINAL                                         \n\n\n\n";
+        cout << "                                     MATCH TERMINAL                                         \n\n";
         cout << "Select one option..\n";
         cout << "1.Display Teams\n";
         cout << "2.Play next Match\n";
@@ -27,42 +29,95 @@ public:
     }
     void choices()
     {
-        int c=0;
+        int c = 0;
+        char d = 0;
         do
         {
-            menu();   
-            cout<<"Enter your choice: ";
-            cin>>c;
-            switch(c)
+            system("cls");
+            menu();
+            cout << "Enter your choice: ";
+            cin >> c;
+            cout << "\n";
+            switch (c)
             {
-                case 1:
-                cout<<"Team 1:- \n";
+            case 1:
+                cout << "Team 1:- \n";
                 team1.displayTeam();
-                cout<<"Team 2:- \n";
+                cout << "Team 2:- \n";
                 team2.displayTeam();
+                cout << "\nEnter any char to continue: ";
+                cin >> d;
                 break;
-                case 2:
+
+            case 2:
                 match[getMatchesPlayed()].Playmatch(team1, team2);
                 updateMatchesPlayed();
                 break;
-                case 3:
+
+            case 3:
+                int n;
+                cout << "Enter match number(Matches played till now = " << getMatchesPlayed() << ") : ";
+                cin >> n;
+                if (n >= 1 && n <= getMatchesPlayed())
+                    displayMatchScorecard(n);
+                else
+                    cout << "Invalid input try again";
+                cout << "\nEnter any char to continue: ";
+                cin >> d;
                 break;
-                case 4:
+
+            case 4:
+                if (getMatchesPlayed())
+                {
+                    int m;
+                    cout << "Enter match number(Matches played till now = " << getMatchesPlayed() << ") : ";
+                    cin >> m;
+                    if (m >= 1 && m <= getMatchesPlayed())
+                        displayTeamStats(m);
+                    else
+                        cout << "No matches played yet!\n";
+                }
+                else
+                    cout << "No matches played yet!\n";
+                cout << "\nEnter any char to continue: ";
+                cin >> d;
                 break;
-                case 5:
+
+            case 5:
+                if (getMatchesPlayed())
+                {
+                    int t, p;
+                    cout << "Enter team number : ";
+                    cin >> t;
+                    cout << "Enter player number : ";
+                    cin >> p;
+                    displayPlayerStats(t, p);
+                }
+                else
+                    cout << "No matches played yet!\n";
+                cout << "\nEnter any char to continue: ";
+                cin >> d;
                 break;
-                case 6:
+
+            case 6:
+                if (getMatchesPlayed())
+                    getSeriesStats();
+                else
+                    cout << "No matches played yet!\n";
+                cout << "\nEnter any char to continue: ";
+                cin >> d;
                 break;
-                case 7:
-                cout<<"                                         ADIOS!!                                     " ;
-                c=-1; 
+
+            case 7:
+                cout << "                                         ADIOS!!                                     ";
+                c = -1;
                 break;
-                default:
-                cout<<"Invalid input try again";
-                c=8;
+            default:
+                cout << "Invalid input try again";
+                c = 8;
                 break;
             }
-        } while (c>-1);
+        } while (c > -1);
     }
 };
 #endif

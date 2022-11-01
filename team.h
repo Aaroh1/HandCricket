@@ -73,7 +73,7 @@ void Team::displayTeam()
     cout << "Player 2(Batsman)" << endl;
     cout << "Player 3(Batsman)" << endl;
     cout << "Player 4(Bowler)" << endl;
-    cout << "Player 5(Bowler)" << endl;
+    cout << "Player 5(Bowler)" << endl << endl;
 }
 void Team::updateNoOfWins(int w)
 {

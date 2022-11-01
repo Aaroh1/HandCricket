@@ -1,9 +1,12 @@
 #include <iostream>
+#include <conio.h>
+#include <cstdlib>
 #include "match_terminal.h"
 using namespace std;
 int main()
 {
-    cout << "Welcome to the tri match Hand-Cricket Series!\n";
+    system("cls");
+    cout << "                      Welcome to the tri match Hand-Cricket Series!\n";
     Batsman *b1 = new Batsman[3];
     Batsman *b2 = new Batsman[3];
     Bowler *bo1 = new Bowler[2];
@@ -15,7 +18,7 @@ int main()
     cout << "Enter name of team 2 : ";
     cin >> name;
     Team team2(name, b2, bo2);
-    Matchterminal mt(team1,team2);
+    Matchterminal mt(team1, team2);
     mt.choices();
     return 0;
 }
