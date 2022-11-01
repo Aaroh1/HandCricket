@@ -114,8 +114,8 @@ void Match::Bat(int t, Team &t1, Team &t2)
     setCurrentScore(inningsnum - 1, 0);
     setWickets(inningsnum - 1, 0);
     cout << "Innings " << inningsnum << endl;
-    cout << "Batting : Team " << t1.getTeamName() << endl;
-    cout << "Bowling : Team " << t2.getTeamName() << endl;
+    cout << "Batting : Team " <<t+1<< "("<<t1.getTeamName()<<")" << endl;
+    cout << "Bowling : Team " <<!t+1<< "("<<t2.getTeamName()<<")" << endl;
     while (overs < 4)
     {
         cout << "enter a number between 1 and 6: ";
@@ -224,8 +224,8 @@ void Match::Bowl(int t, Team &t1, Team &t2)
     setCurrentScore(inningsnum - 1, 0);
     setWickets(inningsnum - 1, 0);
     cout << "Innings " << inningsnum << endl;
-    cout << "Batting : Team " << t2.getTeamName() << endl;
-    cout << "Bowling : Team " << t1.getTeamName() << endl;
+    cout << "Batting : Team " <<!t+1<< "("<<t2.getTeamName()<<")" << endl;
+    cout << "Bowling : Team " <<t+1<< "("<<t1.getTeamName()<<")" << endl;
     while (overs < 4)
     {
         cout << "Enter a number between 1 and 6: ";
