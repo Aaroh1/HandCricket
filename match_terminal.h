@@ -22,9 +22,10 @@ public:
         cout << "2.Play next Match\n";
         cout << "3.Display Scorecard of any match\n";
         cout << "4.Display Stats of a Team\n";
-        cout << "5.Display Stats of a Player\n";
-        cout << "6.Display Series Stats\n";
-        cout << "7.Exit\n";
+        cout << "5.Display Overall Stats of a Player\n";
+        cout << "6.Display MatchWise Stats of a Player\n";
+        cout << "7.Display Series Stats\n";
+        cout << "8.Exit\n";
         cout << "\n******************************************************************************************\n";
     }
     void choices()
@@ -101,6 +102,38 @@ public:
 
             case 6:
                 if (getMatchesPlayed())
+                {
+                    int t, p ,m;
+                    cout << "Enter team number : ";
+                    cin >> t;
+                    cout << "Enter player number : ";
+                    cin >> p;
+                    cout << "Enter match number (Matches played till now = " << getMatchesPlayed() << ") : ";
+                    cin >> m;
+                    if(t==1)
+                    {
+                        if(p>=1&&p<=3)
+                        team1.batsmen[p-1].displayMatchWiseStats(m);
+                        else
+                        team1.bowlers[p-4].displayBestFigures();
+                    }
+                    else
+                    {
+                        if(p>=1&&p<=3)
+                        team2.batsmen[p-1].displayMatchWiseStats(m);
+                        else
+                        team2.bowlers[p-4].displayBestFigures();
+                    }
+                }
+                else
+                    cout << "No matches played yet!\n";
+                cout << "\nEnter any char to continue: ";
+                cin >> d;
+                break;
+ 
+
+            case 7:
+                if (getMatchesPlayed())
                     getSeriesStats();
                 else
                     cout << "No matches played yet!\n";
@@ -108,7 +141,7 @@ public:
                 cin >> d;
                 break;
 
-            case 7:
+            case 8:
                 cout << "                                         ADIOS!!                                     ";
                 c = -1;
                 break;

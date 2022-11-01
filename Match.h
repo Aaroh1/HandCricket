@@ -302,9 +302,9 @@ void Match::ScoreCard(int m)
 {
     cout<<"Match Number: - "<<m<<endl;
     cout<<"Innings number 1\n";
-    cout<<"- - - - - - - - - -";
-    cout<<"      "<<currentscore[0]<<" - "<<wickets[0]<<"\n";
     cout<<"- - - - - - - - - -\n\n";
+    cout<<"      "<<currentscore[0]<<" - "<<wickets[0]<<"\n";
+    cout<<"\n- - - - - - - - - -\n\n";
 
     cout<<"Innings number 2\n";
     cout<<"- - - - - - - - - -\n\n";

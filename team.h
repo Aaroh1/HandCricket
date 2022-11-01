@@ -13,17 +13,20 @@ private:
     int no_of_Wins;
     int bestBatsman;
     int bestBowler;
-    Batsman *batsmen;
-    Bowler *bowlers;
-
+    
     // Member Functions
     void setBestBatsman(int m);
     void setBestBowler(int m);
 
 public:
+    //Reference to objects of class Batsman and Bowler(Aggregation)
+    Batsman *batsmen;
+    Bowler *bowlers;
     // Constructors
     Team();
     Team(string name, Batsman *batsmen, Bowler *bowlers);
+    
+
     // Member Functions
     int getNoOfWins();
     string getTeamName();

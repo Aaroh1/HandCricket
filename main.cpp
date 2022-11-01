@@ -6,7 +6,7 @@ using namespace std;
 int main()
 {
     system("cls");
-    cout << "                      Welcome to the tri match Hand-Cricket Series!\n";
+    cout << "                      Welcome to the Tri Match Hand-Cricket Series!\n";
     Batsman *b1 = new Batsman[3];
     Batsman *b2 = new Batsman[3];
     Bowler *bo1 = new Bowler[2];

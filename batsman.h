@@ -79,7 +79,7 @@ int Batsman:: getHighestScore(){
     return highest_score;
 }
 void Batsman:: displayMatchWiseStats(int m){
-    cout<<"Runs Scored in Match "<<m<<" : "<<getRuns(m)<<endl;
+    cout<<"Runs Scored in Match "<<m<<" : "<<getRuns(m-1)<<endl;
     cout<<"Balls faced in Match "<<m<<" : "<<balls_faced[m-1]<<endl;
     cout<<"Strike Rate in Match "<<m<<" : "<<getStrikeRate(m)<<endl;
     cout<<"Batting Average till Match "<<m<<" : "<<getBattingAvg()<<endl; 
@@ -93,7 +93,7 @@ void Batsman:: displayBatsmanStats(){
 
 //Private Member Functions
 void Batsman:: setStrikeRate(int m){
-    strike_rate[m-1] = runs_scored[m-1]/balls_faced[m-1];
+    strike_rate[m-1] = (runs_scored[m-1]/balls_faced[m-1])*100;
 }
 void Batsman:: setBattingAvg(int m){
     int runs = 0;
