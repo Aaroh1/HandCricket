@@ -42,7 +42,7 @@ int Bowler:: getWickets(int m){
 }
 int Bowler:: getTotalWickets(int m){
     int total = 0;
-    for(int i=0;i<3;i++){
+    for(int i=1;i<=m;i++){
         total += getWickets(i);
     }
     return total;

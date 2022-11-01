@@ -10,7 +10,7 @@ class Batsman{
     int runs_scored[3];
     float strike_rate[3];
     float batting_avg;
-    static int balls_faced[3];
+    int balls_faced[3];
 
     //Member Functions
     void setStrikeRate(int m);
@@ -36,12 +36,12 @@ class Batsman{
     void displayMatchWiseStats(int m);
     void displayBatsmanStats();
 };
-int Batsman::balls_faced[]={0};
 //Public Member Functions
 Batsman::Batsman(){
     for(int i=0;i<3;i++){
         runs_scored[i] = 0;
         strike_rate[i] = 0;
+        balls_faced[i]=0;
     }
     batting_avg = 0.0;
     highest_score = 0;
@@ -57,7 +57,7 @@ void Batsman:: updateBallsFaced(int m){
   balls_faced[m-1]++;
 }
 int Batsman:: getRuns(int m){
-    return runs_scored[m-1];
+    return runs_scored[m];
 }
 int Batsman:: getTotalRuns(int m){
     int total = 0;

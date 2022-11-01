@@ -11,17 +11,21 @@ class Series{
     //Data Members
     static int matches_played;
     
+    protected:
+    
+    Team team1;
+    Team team2;
+    Match match[3];
     
 
     public:
     //Constructors
-    Team team1;
-    Team team2;
-    Match match[3];
     Series(Team cteam1, Team cteam2):team1(cteam1),team2(cteam2),match{Match(), Match(), Match()}{
 }
     //Member Functions    
     void getSeriesStats();
+    int getMatchesPlayed();
+    void updateMatchesPlayed();
     void displayLeaderboard();
     void displayMatchScorecard(int m);
     void displayTeamStats(int t);
@@ -40,6 +44,12 @@ void Series:: getSeriesStats(){
         cout<<"Series is levelled up at "<<team1.getNoOfWins()<<" - "<<team2.getNoOfWins()<<endl;
     }
 }
+int Series:: getMatchesPlayed(){
+    return matches_played;
+}
+void Series:: updateMatchesPlayed(){
+    matches_played++;
+}
 void Series:: displayLeaderboard(){
 
 }
@@ -54,7 +64,7 @@ void Series:: displayTeamStats(int m){
 }
 void Series:: displayPlayerStats(int t, int p){
     if(t==0 && p>=1 && p<=5) team1.displayPlayerStats(p);
-    else if(t==1 && p>=1 && p<=5) team1.displayPlayerStats(p);
+    else if(t==1 && p>=1 && p<=5) team2.displayPlayerStats(p);
     else cout<<"Inappropiate team or player selection"<<endl;
 }
 

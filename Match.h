@@ -31,26 +31,26 @@ protected:
 public:
     Match()
     {
-        target=-1;
-        currentscore=0;
-        wickets=0;
-        matchnum=0;
-        inningsnum=1;
+        target = -1;
+        currentscore = 0;
+        wickets = 0;
+        matchnum = 0;
+        inningsnum = 1;
     }
     void ScoreCard();
     void Playmatch(Team &, Team &);
 };
 void Match::setTarget(int t)
 {
-    target=t;
+    target = t;
 }
 void Match::setCurrentScore(int s)
 {
-    currentscore=s;
+    currentscore = s;
 }
 void Match::setWickets(int w)
 {
-    wickets=w;
+    wickets = w;
 }
 int Match::getTarget()
 {
@@ -62,8 +62,8 @@ int Match::Toss()
 }
 void Match::Playmatch(Team &t1, Team &t2)
 {
-    matchnum=t1.getNoOfWins()+t2.getNoOfWins()+1;
-    cout<<"Match "<<matchnum<<" out of 4 in the Series\n";
+    matchnum = t1.getNoOfWins() + t2.getNoOfWins() + 1;
+    cout << "Match " << matchnum << " out of 3 in the Series\n";
     cout << "Match about to begin .....\n";
     int teambat, teambowl;
     teambat = Toss();
@@ -72,6 +72,14 @@ void Match::Playmatch(Team &t1, Team &t2)
     cout << "Which team would you like to play as!? ";
     int choice;
     cin >> choice;
+    cout << "You are playing as team " << choice << " !\n";
+    cout << "Starting in 3... ";
+        _sleep(1000);
+        cout << "2... ";
+        _sleep(1000);
+        cout << "1... ";
+        _sleep(1000);
+        cout << endl;
     if (choice == teambat + 1)
     {
         if (teambat)
@@ -102,11 +110,13 @@ void Match::Playmatch(Team &t1, Team &t2)
 void Match::Bat(int t, Team &t1, Team &t2)
 {
     system("cls");
-    int bat, ball, overs = 0, numballs = 0;setCurrentScore(0);setWickets(0);
+    int bat, ball, overs = 0, numballs = 0;
+    setCurrentScore(0);
+    setWickets(0);
     cout << "Innings " << inningsnum << endl;
-    cout << "Batting : Team " <<t1.getTeamName()<< endl;
-    cout << "Bowling : Team " <<t2.getTeamName()<< endl;
-    while (wickets < 3 && overs < 4)
+    cout << "Batting : Team " << t1.getTeamName() << endl;
+    cout << "Bowling : Team " << t2.getTeamName() << endl;
+    while (overs < 4)
     {
         cout << "enter a number between 1 and 6: ";
         cin >> bat;
@@ -121,8 +131,14 @@ void Match::Bat(int t, Team &t1, Team &t2)
         if (ball == bat)
         {
             wickets++;
-            t2.updateBowlStats(matchnum,0,1,1+overs%2,1+overs%2);
-            cout<< "Oh No! You've lost a wicket....!!\n";
+            t2.updateBowlStats(matchnum, 0, 1, 1 + overs % 2, 1 + overs % 2);
+            t1.updateBatStats(matchnum, 0, wickets);
+            cout << "Oh No! You've lost a wicket....!!\n";
+            if (wickets == 3)
+            {
+                cout << currentscore << " - " << wickets << " \n\n";
+                break;
+            }
             cout << "On strike: Player " << wickets + 1 << endl;
         }
         else
@@ -145,33 +161,37 @@ void Match::Bat(int t, Team &t1, Team &t2)
                 cout << "Cruising out for a four!\n";
                 currentscore += 4;
                 break;
+            case 5:
+                cout << "five runs!\n";
+                currentscore += 5;
+                break;
             case 6:
                 cout << "Smashed out for 6 runs!!\n";
                 currentscore += 6;
                 break;
             }
-            t1.updateBatStats(matchnum,bat,wickets+1);
-            t2.updateBowlStats(matchnum,bat,0,1+overs%2,1+overs%2);
+            t1.updateBatStats(matchnum, bat, wickets + 1);
+            t2.updateBowlStats(matchnum, bat, 0, 1 + overs % 2, 1 + overs % 2);
         }
         // BOX print
         cout << currentscore << " - " << wickets << " \n\n";
         if (target != -1)
         {
-            if (currentscore > target)
+            if (currentscore >= target)
                 break;
             cout << " Team " << t + 1 << " needs " << target - currentscore << " runs in " << 24 - numballs << " balls.\n";
         }
         if (numballs % 6 == 0)
         {
-            cout << "End of over " << overs + 1 << endl;
+            cout << "End of over " << overs + 1 << "\n\n";
             overs++;
             cout << "On strike: Player " << wickets + 1 << endl;
-            cout << "With the Ball: Player " << 4 + overs % 2 << endl;
+            cout << "With the Ball: Player " << 4 + overs % 2 << "\n\n";
         }
     }
     if (wickets == 3)
-        cout << "All OUT!!\n";
-    cout << "End of Innings " << inningsnum << "\n";
+        cout << "All OUT!!\n\n";
+    cout << "\nEnd of Innings " << inningsnum << "\n";
     if (target > -1)
     {
         if (currentscore >= target)
@@ -194,21 +214,23 @@ void Match::Bat(int t, Team &t1, Team &t2)
         cout << "Target for Team " << !t + 1 << " : " << getTarget() << " runs.\n";
         cout << "You need to defend " << getTarget() << " runs in 4 overs.\n";
     }
-    cout<<"\nEnter any number to continue......";
-    cin>>t;
+    cout << "\nEnter any number to continue......";
+    cin >> t;
 }
 void Match::Bowl(int t, Team &t1, Team &t2)
 {
     system("cls");
-    int bat, ball, overs = 0, numballs = 0;setCurrentScore(0);setWickets(0);
+    int bat, ball, overs = 0, numballs = 0;
+    setCurrentScore(0);
+    setWickets(0);
     cout << "Innings " << inningsnum << endl;
-    cout << "Batting : Team " <<t2.getTeamName()<< endl;
-    cout << "Bowling : Team " <<t1.getTeamName()<< endl;
-    while (wickets < 3 && overs < 4 && (target == -1) ? 1 : target > currentscore)
+    cout << "Batting : Team " << t2.getTeamName() << endl;
+    cout << "Bowling : Team " << t1.getTeamName() << endl;
+    while (overs < 4)
     {
         cout << "Enter a number between 1 and 6: ";
         cin >> ball;
-        if (bat < 1 || bat > 6)
+        if (ball < 1 || ball > 6)
         {
             cout << "Invalid entry. Try again\n\n";
             continue;
@@ -219,20 +241,26 @@ void Match::Bowl(int t, Team &t1, Team &t2)
         if (ball == bat)
         {
             wickets++;
-            t1.updateBowlStats(matchnum,0,1,1+overs%2,1+overs%2);
+            t1.updateBowlStats(matchnum, 0, 1, 1 + overs % 2, 1 + overs % 2);
+            t2.updateBatStats(matchnum, 0, wickets);
             cout << "Beautiful delivery! The CPU lost a wicket....!!\n";
+            if (wickets == 3)
+            {
+                cout << currentscore << " - " << wickets << " \n\n";
+                break;
+            }
         }
         else
         {
             currentscore += bat;
-            t2.updateBatStats(matchnum,bat,wickets+1);
-            t1.updateBowlStats(matchnum,bat,0,1+overs%2,1+overs%2);
+            t2.updateBatStats(matchnum, bat, wickets + 1);
+            t1.updateBowlStats(matchnum, bat, 0, 1 + overs % 2, 1 + overs % 2);
         }
         // BOX print
         cout << currentscore << " - " << wickets << " \n";
         if (target != -1)
         {
-            if (currentscore > target)
+            if (currentscore >= target)
                 break;
             cout << " Team " << !t + 1 << " needs " << target - currentscore << " runs in " << 24 - numballs << " balls.\n";
         }
@@ -246,7 +274,7 @@ void Match::Bowl(int t, Team &t1, Team &t2)
     }
     if (wickets == 3)
         cout << "All OUT!!\n";
-    cout << "End of Innings " << inningsnum << "\n";
+    cout << "\nEnd of Innings " << inningsnum << "\n";
     if (target > -1)
     {
         if (currentscore >= target)
@@ -269,7 +297,7 @@ void Match::Bowl(int t, Team &t1, Team &t2)
         cout << "Target for Team " << !t + 1 << " : " << getTarget() << " runs.\n";
         cout << "You need to score " << getTarget() << " run in 4 overs.\n";
     }
-    cout<<"\nEnter any number to continue......";
-    cin>>t;
+    cout << "\nEnter any number to continue......";
+    cin >> t;
 }
 #endif
