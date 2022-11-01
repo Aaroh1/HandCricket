@@ -51,7 +51,15 @@ void Series:: updateMatchesPlayed(){
     matches_played++;
 }
 void Series:: displayLeaderboard(){
-    
+    int bats1 = team1.getBestBatsman();
+    int bats2 = team2.getBestBatsman();
+    int bowl1 = team1.getBestBowler();
+    int bowl2 = team2.getBestBowler();
+    if(team1.batsmen[bats1].getTotalRuns(3) > team2.batsmen[bats2].getTotalRuns(3)){
+        cout<<"Best Batsman of the series : Player "<<bats2<<"(Team 2)"<<"["<<team2.batsmen[bats2].getTotalRuns(3)<<" runs]"<<endl;
+    } else{
+
+    }
 }
 void Series:: displayMatchScorecard(int m){
     match[m-1].ScoreCard(m);
