@@ -7,14 +7,10 @@ using namespace std;
 #include "Match.h"
 #ifndef TERMINAL_H
 #define TERMINAL_H
-class Matchterminal
+class Matchterminal:public Series
 {
 public:
-    Matchterminal() {}
-    void WELCOME()
-    {
-        cout << "Welcome to the tri match Hand-Cricket Series!\n";
-    }
+    Matchterminal(Team cteam1, Team cteam2):Series(cteam1,cteam2){}
     void menu()
     {
         cout << "\n******************************************************************************************\n";
@@ -31,18 +27,6 @@ public:
     }
     void choices()
     {
-        Batsman *b1 = new Batsman[3];
-        Batsman *b2 = new Batsman[3];
-        Bowler *bo1 = new Bowler[2];
-        Bowler *bo2 = new Bowler[2];
-        string name;
-        cout << "Enter name of team 1 : ";
-        cin >> name;
-        Team team1(name, b1, bo1);
-        cout << "Enter name of team 2 : ";
-        cin >> name;
-        Team team2(name, b2, bo2);
-        Series s(team1, team2);
         int c=0;
         do
         {
@@ -53,12 +37,13 @@ public:
             {
                 case 1:
                 cout<<"Team 1:- \n";
-                s.team1.displayTeam();
+                team1.displayTeam();
                 cout<<"Team 2:- \n";
-                s.team2.displayTeam();
+                team2.displayTeam();
                 break;
                 case 2:
-                s.match[s.getMatchesPlayed()].Playmatch(s.team1, s.team2);
+                match[getMatchesPlayed()].Playmatch(team1, team2);
+                updateMatchesPlayed();
                 break;
                 case 3:
                 break;
@@ -78,16 +63,6 @@ public:
                 break;
             }
         } while (c>-1);
-
-        int c;
-        cout << "Enter 1 to play ";
-        cin >> c;
-        s.displayTeamStats(1);
-        cout << "\n";
-        s.displayPlayerStats(1, 3);
-        s.displayPlayerStats(1, 4);
-        s.team1.displayMatchStats(1);
-        s.team2.displayMatchStats(1);
     }
 };
 #endif
