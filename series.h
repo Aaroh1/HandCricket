@@ -56,10 +56,17 @@ void Series:: displayLeaderboard(){
     int bowl1 = team1.getBestBowler();
     int bowl2 = team2.getBestBowler();
     if(team1.batsmen[bats1].getTotalRuns(3) > team2.batsmen[bats2].getTotalRuns(3)){
-        cout<<"Best Batsman of the series : Player "<<bats2<<"(Team 2)"<<"["<<team2.batsmen[bats2].getTotalRuns(3)<<" runs]"<<endl;
+        cout<<"Best Batsman of the series : Player "<<bats1<<"(Team 1)"<<"["<<team1.batsmen[bats1].getTotalRuns(3)<<" runs in the series]"<<endl;
     } else{
-
+        cout<<"Best Batsman of the series : Player "<<bats2<<"(Team 2)"<<"["<<team2.batsmen[bats2].getTotalRuns(3)<<" runs in the series]"<<endl;
     }
+    cout<<endl;
+    if(team1.bowlers[bowl1].getTotalWickets(3) > team2.bowlers[bowl2].getTotalWickets(3)){
+        cout<<"Best Bowler of the series : Player "<<bowl1+4<<"(Team 1)"<<"["<<team1.bowlers[bowl1].getTotalWickets(3)<<" wickets in the series]"<<endl;
+    } else{
+        cout<<"Best Bowler of the series : Player "<<bowl2+4<<"(Team 2)"<<"["<<team2.bowlers[bowl2].getTotalWickets(3)<<" wickets in the series]"<<endl;
+    }
+    cout<<endl;
 }
 void Series:: displayMatchScorecard(int m){
     match[m-1].ScoreCard(m);

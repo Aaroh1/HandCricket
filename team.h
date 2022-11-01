@@ -70,7 +70,7 @@ int Team::getBestBowler()
 }
 void Team::displayTeam()
 {
-    cout << "Playing team" << endl;
+    cout << "Playing team" << name<<endl;
     cout << "_____________" << endl;
     cout << "Player 1(Batsman)" << endl;
     cout << "Player 2(Batsman)" << endl;

@@ -103,26 +103,26 @@ public:
             case 6:
                 if (getMatchesPlayed())
                 {
-                    int t, p ,m;
+                    int t, p, m;
                     cout << "Enter team number : ";
                     cin >> t;
                     cout << "Enter player number : ";
                     cin >> p;
                     cout << "Enter match number (Matches played till now = " << getMatchesPlayed() << ") : ";
                     cin >> m;
-                    if(t==1)
+                    if (t == 1)
                     {
-                        if(p>=1&&p<=3)
-                        team1.batsmen[p-1].displayMatchWiseStats(m);
+                        if (p >= 1 && p <= 3)
+                            team1.batsmen[p - 1].displayMatchWiseStats(m);
                         else
-                        team1.bowlers[p-4].displayBestFigures();
+                            team1.bowlers[p - 4].displayBestFigures();
                     }
                     else
                     {
-                        if(p>=1&&p<=3)
-                        team2.batsmen[p-1].displayMatchWiseStats(m);
+                        if (p >= 1 && p <= 3)
+                            team2.batsmen[p - 1].displayMatchWiseStats(m);
                         else
-                        team2.bowlers[p-4].displayBestFigures();
+                            team2.bowlers[p - 4].displayBestFigures();
                     }
                 }
                 else
@@ -130,7 +130,6 @@ public:
                 cout << "\nEnter any char to continue: ";
                 cin >> d;
                 break;
- 
 
             case 7:
                 if (getMatchesPlayed())
@@ -143,7 +142,7 @@ public:
 
             case 8:
                 cout << "                                         ADIOS!!                                     ";
-                c = -1;
+                c = -2;
                 break;
             default:
                 cout << "Invalid input try again";
@@ -151,6 +150,12 @@ public:
                 break;
             }
         } while (c > -1);
+        SeriesResult();
+    }
+    void SeriesResult()
+    {
+        cout<<"\n                 The Series has ended!..\n";
+        displayLeaderboard();
     }
 };
 #endif
