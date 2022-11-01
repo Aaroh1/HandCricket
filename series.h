@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 #include "team.h"
-#include "Match.cpp"
+#include "Match.h"
 #ifndef SERIES_H
 #define SERIES_H
 
@@ -10,13 +10,16 @@ class Series{
     private:
     //Data Members
     static int matches_played;
-    Team team1;
-    Team team2;
-    Match match[3];
+    
+    
 
     public:
     //Constructors
-    Series(Team cteam1, Team cteam2, Match cmatch[]);
+    Team team1;
+    Team team2;
+    Match match[3];
+    Series(Team cteam1, Team cteam2):team1(cteam1),team2(cteam2),match{Match(), Match(), Match()}{
+}
     //Member Functions    
     void getSeriesStats();
     void displayLeaderboard();
@@ -28,8 +31,6 @@ class Series{
 int Series::matches_played = 0;
 
 //Public Member Functions
-Series:: Series(Team cteam1, Team cteam2, Match cmatch[]):team1(cteam1),team2(cteam2),match{Match(), Match(), Match()}{
-}
 void Series:: getSeriesStats(){
     if(team1.getNoOfWins() > team2.getNoOfWins()){
         cout<<team1.getTeamName()<<" is leading the series by "<<team1.getNoOfWins()<<" - "<<team2.getNoOfWins()<<endl;
@@ -43,7 +44,7 @@ void Series:: displayLeaderboard(){
 
 }
 void Series:: displayMatchScorecard(int m){
-    match[m-1].ScoreCard();
+    // match[m-1].ScoreCard();
 }
 void Series:: displayTeamStats(int m){
     cout<<team1.getTeamName()<<" Stats"<<endl;

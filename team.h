@@ -74,6 +74,7 @@ void Team:: updateNoOfWins(int w){
 }
 void Team:: updateBatStats(int m, int runs, int p){
     batsmen[p-1].setRuns(m,runs);
+    batsmen[p-1].updateBallsFaced(m);
     setBestBatsman(m);
 }
 void Team:: updateBowlStats(int m, int runs, int w, int p, float overs){
