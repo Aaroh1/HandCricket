@@ -71,7 +71,13 @@ void Match::Playmatch(Team &t1, Team &t2)
     cout << "Team " << teambat + 1 << " has won the Toss and decided to bat first!\n";
     cout << "Which team would you like to play as!? ";
     int choice;
-    cin >> choice;
+    int b=1;
+    while(b)
+    {cin >> choice;
+    if(choice>2||choice<1)
+    cout<<"Please choose correct team!\n";
+    else
+    b=0;}
     cout << "You are playing as team " << choice << " !\n";
     cout << "Starting in 3... ";
     _sleep(1000);

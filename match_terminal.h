@@ -23,7 +23,7 @@ public:
         cout << "3.Display Scorecard of any match\n";
         cout << "4.Display Stats of a Team\n";
         cout << "5.Display Overall Stats of a Player\n";
-        cout << "6.Display MatchWise Stats of a Player\n";
+        cout << "6.Display MatchWise Stats of a Player(Batsman)\n";
         cout << "7.Display Series Stats\n";
         cout << "8.Exit\n";
         cout << "\n******************************************************************************************\n";
@@ -51,8 +51,15 @@ public:
                 break;
 
             case 2:
-                match[getMatchesPlayed()].Playmatch(team1, team2);
-                updateMatchesPlayed();
+                if (getMatchesPlayed() == 3)
+                    {cout << "All matches of the series have ended\n. Have a look at all the statistics or exit.\n";
+                    cout << "\nEnter any char to continue: ";
+                    cin >> d;}
+                else
+                {
+                    match[getMatchesPlayed()].Playmatch(team1, team2);
+                    updateMatchesPlayed();
+                }
                 break;
 
             case 3:
@@ -115,14 +122,14 @@ public:
                         if (p >= 1 && p <= 3)
                             team1.batsmen[p - 1].displayMatchWiseStats(m);
                         else
-                            team1.bowlers[p - 4].displayBestFigures();
+                            cout<<"invalid choice\n";
                     }
                     else
                     {
                         if (p >= 1 && p <= 3)
                             team2.batsmen[p - 1].displayMatchWiseStats(m);
                         else
-                            team2.bowlers[p - 4].displayBestFigures();
+                            cout<<"invalid choice\n";
                     }
                 }
                 else
@@ -146,6 +153,8 @@ public:
                 break;
             default:
                 cout << "Invalid input try again";
+                cout << "\nEnter any char to continue: ";
+                cin >> d;
                 c = 8;
                 break;
             }
@@ -154,7 +163,11 @@ public:
     }
     void SeriesResult()
     {
-        cout<<"\n                 The Series has ended!..\n";
+        cout << "\n                 The Series has ended!..\n\n";
+        if(team1.getNoOfWins()>team2.getNoOfWins())
+        cout<<"Champions are:   - TEAM "<<team1.getTeamName()<<endl;
+        else
+        cout<<"Champions are:   - TEAM "<<team2.getTeamName()<<endl;
         displayLeaderboard();
     }
 };

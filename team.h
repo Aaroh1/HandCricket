@@ -129,6 +129,7 @@ void Team::displayPlayerStats(int p)
     {
         cout << "Role: Bowler" << endl;
         bowlers[p - 4].displayBowlerStats();
+        bowlers[p - 4].displayBestFigures();
     }
     else
         cout << "Sorry, Player does not exist!" << endl;

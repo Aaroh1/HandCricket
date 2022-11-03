@@ -62,17 +62,18 @@ float Bowler:: getEconomy(int m){
 void Bowler:: displayBestFigures(){
     int runs = INT_MAX, wicket = INT_MIN;
     for(int i=0;i<3;i++){
-        if(wickets[i]>=wicket || runs_conceeded[i]<runs){
+        if(wickets[i]>=wicket || (runs_conceeded[i]&&runs_conceeded[i]<runs)){
             runs = runs_conceeded[i];
             wicket = wickets[i];
         }
     }
-    cout<<"Best Figures: "<<runs<<"-"<<wicket<<endl;
+    cout<<"\nBest Figures: "<<runs<<"-"<<wicket<<endl;
 }
 void Bowler:: displayBowlerStats(){
     for(int i=0;i<3;i++){
         cout<<"Match "<<i+1<<setw(15)<<runs_conceeded[i]<<"-"<<wickets[i]<<"\n\n";
     }
+
 }
 
 #endif
