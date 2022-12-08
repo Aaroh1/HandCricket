@@ -68,7 +68,9 @@ void Match::Playmatch(Team &t1, Team &t2)
     int teambat, teambowl;
     teambat = Toss();
     teambowl = !teambat;
-    cout << "Team " << teambat + 1 << " has won the Toss and decided to bat first!\n";
+    if(teambat + 1 == 1) cout<<t1.getTeamName()<<"(Team 1) has won the Toss and decided to bat first!\n";
+    else cout<<t2.getTeamName()<<"(Team 2) has won the Toss and decided to bat first!\n";
+    
     cout << "Which team would you like to play as!? ";
     int choice;
     int b=1;
@@ -133,7 +135,7 @@ void Match::Bat(int t, Team &t1, Team &t2)
         }
         ball = rand() % 6 + 1;
         numballs++;
-        cout << "The cpu picked : " << ball << endl;
+        cout << "The CPU picked : " << ball << endl;
         if (ball == bat)
         {
             wickets[inningsnum - 1]++;
@@ -168,7 +170,7 @@ void Match::Bat(int t, Team &t1, Team &t2)
                 currentscore[inningsnum - 1] += 4;
                 break;
             case 5:
-                cout << "five runs!\n";
+                cout << "Five runs!\n";
                 currentscore[inningsnum - 1] += 5;
                 break;
             case 6:
