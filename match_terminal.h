@@ -166,6 +166,8 @@ public:
         cout << "\n                 The Series has ended!..\n\n";
         if(team1.getNoOfWins()>team2.getNoOfWins())
         cout<<"Champions are:   - TEAM "<<team1.getTeamName()<<endl;
+        else if (team1.getNoOfWins()==team2.getNoOfWins())
+        cout<<"The series is drawn....!"<<endl;
         else
         cout<<"Champions are:   - TEAM "<<team2.getTeamName()<<endl;
         displayLeaderboard();
