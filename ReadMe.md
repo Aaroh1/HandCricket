@@ -6,6 +6,30 @@
  |  _  |/ ___ \| |\  | |_| |   | |___|  _ < | | |___| . \| |___  | |  
  |_| |_/_/   \_\_| \_|____/     \____|_| \_\___\____|_|\_\_____| |_|  
 
+## Assumptions
+1. There are only two teams in the series.
+2. The series is of 3 matches.
+3. There are 5 players in each team.
+4. There are 3 batsman and 2 bowlers in each team.
+5. The team which wins the toss will bat first.
+6. You can decide which team you want to play for.
+7. Each inning will have 4 overs and a team will be all out after 3 wickets.
+
+
+## HOW TO PLAY
+1. First you have to choose the team you want to play for.
+2. If you are batting, you have to choose a number between 1-6.
+3. If the number you choose is same as the number the bowler chooses, you will be out.
+4. If the number you choose is different from the number the bowler chooses, the runs will be added to your score.
+5. If you are bowling, you have to choose a number between 1-6.
+6. If the number you choose is same as the number the batsman chooses, the batsman will be out.
+7. If the number you choose is different from the number the batsman chooses, the runs will be added to the batsman's score.
+8. The team which scores more runs wins the match.
+9. The team which wins more matches wins the series.
+10. You can also view the stats of the series, team, match and players.
+
+
+
 ## Classes defined :
 
 1. Match
